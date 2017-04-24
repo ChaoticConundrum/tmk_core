@@ -21,10 +21,10 @@
  * permit persons to whom the Software is furnished to do so, subject to
  * the following conditions:
  *
- * 1. The above copyright notice and this permission notice shall be 
+ * 1. The above copyright notice and this permission notice shall be
  * included in all copies or substantial portions of the Software.
  *
- * 2. If the Software is incorporated into a build system that allows 
+ * 2. If the Software is incorporated into a build system that allows
  * selection among a list of target devices, then similar target
  * devices manufactured by PJRC.COM must be included in the list of
  * target devices and selectable in the same manner.
@@ -140,7 +140,7 @@ void eeprom_read_block(void *buf, const void *addr, uint32_t len)
 	uint32_t offset = (uint32_t)addr;
 	uint8_t *dest = (uint8_t *)buf;
 	uint32_t end = offset + len;
-	
+
 	if (!(FTFL->FCNFG & FTFL_FCNFG_EEERDY)) eeprom_initialize();
 	if (end > EEPROM_SIZE) end = EEPROM_SIZE;
 	while (offset < end) {
@@ -498,6 +498,42 @@ void eeprom_write_block(const void *buf, void *addr, uint32_t len)
 	while (len--) {
 		eeprom_write_byte(p++, *src++);
 	}
+}
+
+#elif defined(HT32)
+
+
+void eeprom_initialize(void){
+
+}
+uint8_t eeprom_read_byte(const uint8_t *addr){
+    return 0;
+}
+uint16_t eeprom_read_word(const uint16_t *addr){
+    return 0;
+}
+uint32_t eeprom_read_dword(const uint32_t *addr){
+    return 0;
+}
+void eeprom_read_block(void *buf, const void *addr, uint32_t len){
+
+}
+
+int eeprom_is_ready(void){
+    return 1;
+}
+
+void eeprom_write_byte(uint8_t *addr, uint8_t value){
+
+}
+void eeprom_write_word(uint16_t *addr, uint16_t value){
+
+}
+void eeprom_write_dword(uint32_t *addr, uint32_t value){
+
+}
+void eeprom_write_block(const void *buf, void *addr, uint32_t len){
+
 }
 
 #else
